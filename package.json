@@ -1,5 +1,5 @@
 {
-  "homepage": "http://larshbj.github.io/bottle-detector",
+  "homepage": "https://larshbj.github.io/bottle-detector",
   "name": "bottle-detector",
   "version": "0.1.0",
   "private": true,
@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
