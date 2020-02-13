@@ -3,24 +3,31 @@ import styled from "styled-components";
 import "@tensorflow/tfjs";
 import * as automl from "@tensorflow/tfjs-automl";
 
-const Header = styled.h1`
-  text-align: center;
+const ArmyBubble = styled.div`
+  display: flex;
   background: rgba(255, 255, 255, 0.8);
-  border-radius: 3px;
-  padding: 0 1rem;
+  max-width: 50vw;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 15px;
+  text-align: center;
+  align-items: center;
 `;
 
 const ArmyEmoji = styled.img`
-  height: 15px;
-  width: 15px;
+  height: 80px;
+  width: 80px;
+  margin-right: 0.7rem;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 1rem 1rem;
   position: fixed;
   z-index: 2;
+  align-items: center;
 `;
 
 const VideoCanvasContainer = styled.div`
@@ -48,19 +55,19 @@ const DescriptionContainer = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 2;
-  bottom: 7vh;
+  bottom: 2rem;
 `;
 
 const Description = styled.div`
   background: rgba(255, 255, 255, 0.8);
   max-width: 60vw;
   font-weight: bold;
-  border-radius: 3px;
+  border-radius: 15px;
   text-align: center;
   padding: 0.5rem;
 `;
 
-const modelUrl = "model/model.json"; // URL to the model.json file.
+const modelUrl = "edge_best_tradeoff/model.json"; // URL to the model.json file.
 
 class App extends React.Component {
   videoRef = React.createRef();
@@ -97,7 +104,7 @@ class App extends React.Component {
   }
 
   detectFrame = (video, model) => {
-    const options = { score: 0.985, iou: 0.8, topk: 3 };
+    const options = { score: 0.917, iou: 0.5, topk: 1 };
     model.detect(video, options).then(predictions => {
       this.renderPredictions(predictions);
       requestAnimationFrame(() => {
@@ -144,8 +151,8 @@ class App extends React.Component {
     return (
       <div>
         <HeaderContainer>
-          {/* <Header>Flaskefinner</Header> */}
-          <ArmyEmoji src="army_emoji2.jpg"></ArmyEmoji>
+          <ArmyEmoji src="army_emoji3.png"></ArmyEmoji>
+          <ArmyBubble>Jeg har militærbakgrunn!</ArmyBubble>
         </HeaderContainer>
         <VideoCanvasContainer>
           <StyledVideo autoPlay playsInline muted ref={this.videoRef} />
@@ -157,7 +164,10 @@ class App extends React.Component {
         />
         <DescriptionContainer>
           <Description>
-            Pek meg rundt omkring, og jeg vil finne flasken for deg🤓
+            Pek meg rundt omkring, og jeg vil finne flasken for deg
+            <span role="img" aria-label="nerd emoji">
+              🤓
+            </span>
           </Description>
         </DescriptionContainer>
       </div>
